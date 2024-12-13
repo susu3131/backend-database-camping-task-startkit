@@ -54,42 +54,42 @@ LIMIT 3;
 --     -- 2. 名稱為`14 堂組合包方案`，價格為`2,520` 元，堂數為`14`
 --     -- 3. 名稱為 `21 堂組合包方案`，價格為`4,800` 元，堂數為`21`
 
--- INSERT INTO "CREDIT_PACKAGE" (name, credit_amount, price)
--- VALUES
--- ('7 堂組合包方案', 7, 1400),
--- ('14 堂組合包方案', 14, 2520),
--- ('21 堂組合包方案', 21, 4800);
+INSERT INTO "CREDIT_PACKAGE" (name, credit_amount, price)
+VALUES
+('7 堂組合包方案', 7, 1400),
+('14 堂組合包方案', 14, 2520),
+('21 堂組合包方案', 21, 4800);
 
--- -- -- 2-2. 新增：在 `CREDIT_PURCHASE` 資料表，新增三筆資料：（請使用 name 欄位做子查詢）
--- --     -- 1. `王小明` 購買 `14 堂組合包方案`
--- --     -- 2. `王小明` 購買 `21 堂組合包方案`
--- --     -- 3. `好野人` 購買 `14 堂組合包方案`
--- INSERT INTO "CREDIT_PURCHASE" (user_id, credit_package_id, purchased_credits, price_paid)
--- VALUES
--- (
---   (SELECT ID FROM "USER" WHERE name = '王小明'),
---   (SELECT ID FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
---   (SELECT credit_amount FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
---   (SELECT price FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案')
--- );
+-- -- 2-2. 新增：在 `CREDIT_PURCHASE` 資料表，新增三筆資料：（請使用 name 欄位做子查詢）
+--     -- 1. `王小明` 購買 `14 堂組合包方案`
+--     -- 2. `王小明` 購買 `21 堂組合包方案`
+--     -- 3. `好野人` 購買 `14 堂組合包方案`
+INSERT INTO "CREDIT_PURCHASE" (user_id, credit_package_id, purchased_credits, price_paid)
+VALUES
+(
+  (SELECT ID FROM "USER" WHERE name = '王小明'),
+  (SELECT ID FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
+  (SELECT credit_amount FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
+  (SELECT price FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案')
+);
 
--- INSERT INTO "CREDIT_PURCHASE" (user_id, credit_package_id, purchased_credits, price_paid)
--- VALUES
--- (
---   (SELECT ID FROM "USER" WHERE name = '王小明'),
---   (SELECT ID FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案'),
---   (SELECT credit_amount FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案'),
---   (SELECT price FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案')
--- );
+INSERT INTO "CREDIT_PURCHASE" (user_id, credit_package_id, purchased_credits, price_paid)
+VALUES
+(
+  (SELECT ID FROM "USER" WHERE name = '王小明'),
+  (SELECT ID FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案'),
+  (SELECT credit_amount FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案'),
+  (SELECT price FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案')
+);
 
--- INSERT INTO "CREDIT_PURCHASE" (user_id, credit_package_id, purchased_credits, price_paid)
--- VALUES
--- (
---   (SELECT ID FROM "USER" WHERE name = '好野人'),
---   (SELECT ID FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
---   (SELECT credit_amount FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
---   (SELECT price FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案')
--- );
+INSERT INTO "CREDIT_PURCHASE" (user_id, credit_package_id, purchased_credits, price_paid)
+VALUES
+(
+  (SELECT ID FROM "USER" WHERE name = '好野人'),
+  (SELECT ID FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
+  (SELECT credit_amount FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
+  (SELECT price FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案')
+);
 
 -- -- ████████  █████   █    ████   
 -- --   █ █   ██    █  █         ██ 
@@ -103,39 +103,39 @@ LIMIT 3;
 --     -- 2. 將用戶`肌肉棒子`新增為教練，並且年資設定為2年 muscle@hexschooltest.io
 --     -- 3. 將用戶`Q太郎`新增為教練，並且年資設定為2年 starplatinum@hexschooltest.io
 
-INSERT INTO "COACH" (user_id,experience_years)
-VALUES
-((SELECT ID FROM "USER" WHERE name = '李燕容'),2),
-((SELECT ID FROM "USER" WHERE name = '肌肉棒子'),2),
-((SELECT ID FROM "USER" WHERE name = 'Q太郎'),2);
+-- INSERT INTO "COACH" (user_id,experience_years)
+-- VALUES
+-- ((SELECT ID FROM "USER" WHERE name = '李燕容'),2),
+-- ((SELECT ID FROM "USER" WHERE name = '肌肉棒子'),2),
+-- ((SELECT ID FROM "USER" WHERE name = 'Q太郎'),2);
 
 -- -- 3-2. 新增：承1，為三名教練新增專長資料至 `COACH_LINK_SKILL` ，資料需求如下：
 --     -- 1. 所有教練都有 `重訓` 專長
 --     -- 2. 教練`肌肉棒子` 需要有 `瑜伽` 專長
 --     -- 3. 教練`Q太郎` 需要有 `有氧運動` 與 `復健訓練` 專長
 
-INSERT INTO "COACH_LINK_SKILL" (coach_id,skill_id)
-VALUES
-(
-  (SELECT ID FROM "COACH" 
-	 WHERE user_id = (SELECT ID FROM "USER" WHERE email = 'lee2000@hexschooltest.io')),
-  (SELECT ID FROM "SKILL" WHERE name = '重訓')
-),
-(
-  (SELECT ID FROM "COACH" 
-	 WHERE user_id = (SELECT ID FROM "USER" WHERE email = 'muscle@hexschooltest.io')),
-  (SELECT ID FROM "SKILL" WHERE name = '瑜伽')
-),
-(
-   (SELECT ID FROM "COACH" 
-	 WHERE user_id = (SELECT ID FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')),
-  (SELECT ID FROM "SKILL" WHERE name = '有氧運動')
-),
-(
-   (SELECT ID FROM "COACH" 
-	 WHERE user_id = (SELECT ID FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')),
-  (SELECT ID FROM "SKILL" WHERE name = '復健訓練')
-);
+-- INSERT INTO "COACH_LINK_SKILL" (coach_id,skill_id)
+-- VALUES
+-- (
+--   (SELECT ID FROM "COACH" 
+-- 	 WHERE user_id = (SELECT ID FROM "USER" WHERE email = 'lee2000@hexschooltest.io')),
+--   (SELECT ID FROM "SKILL" WHERE name = '重訓')
+-- ),
+-- (
+--   (SELECT ID FROM "COACH" 
+-- 	 WHERE user_id = (SELECT ID FROM "USER" WHERE email = 'muscle@hexschooltest.io')),
+--   (SELECT ID FROM "SKILL" WHERE name = '瑜伽')
+-- ),
+-- (
+--    (SELECT ID FROM "COACH" 
+-- 	 WHERE user_id = (SELECT ID FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')),
+--   (SELECT ID FROM "SKILL" WHERE name = '有氧運動')
+-- ),
+-- (
+--    (SELECT ID FROM "COACH" 
+-- 	 WHERE user_id = (SELECT ID FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')),
+--   (SELECT ID FROM "SKILL" WHERE name = '復健訓練')
+-- );
 
 -- -- 3-3 修改：更新教練的經驗年數，資料需求如下：
 --     -- 1. 教練`肌肉棒子` 的經驗年數為3年
@@ -173,17 +173,17 @@ WHERE NAME = '空中瑜伽';
 --     -- 6. 最大授課人數`max_participants` 設定為10
 --     -- 7. 授課連結設定`meeting_url`為 https://test-meeting.test.io
 
--- INSERT INTO "COURSE" (user_id, skill_id, name, start_at, end_at, max_participants, meeting_url) 
--- VALUES
--- (
---   (SELECT ID FROM "USER" WHERE EMAIL = 'lee2000@hexschooltest.io'),
---   (SELECT ID FROM "SKILL" WHERE NAME = '重訓'),
---   '重訓基礎課',
---   '2024-11-25 14:00:00',
---   '2024-11-25 16:00:00',
---   10,
---   'https://test-meeting.test.io'
--- );
+INSERT INTO "COURSE" (user_id, skill_id, name, start_at, end_at, max_participants, meeting_url) 
+VALUES
+(
+  (SELECT ID FROM "USER" WHERE EMAIL = 'lee2000@hexschooltest.io'),
+  (SELECT ID FROM "SKILL" WHERE NAME = '重訓'),
+  '重訓基礎課',
+  '2024-11-25 14:00:00',
+  '2024-11-25 16:00:00',
+  10,
+  'https://test-meeting.test.io'
+);
 
 
 -- ████████  █████   █    █████ 
