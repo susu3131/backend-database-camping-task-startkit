@@ -141,20 +141,20 @@ VALUES
 --     -- 1. 教練`肌肉棒子` 的經驗年數為3年
 --     -- 2. 教練`Q太郎` 的經驗年數為5年
 
-UPDATE "COACH"
-SET "experience_years" = 3
-WHERE user_id  = (SELECT ID FROM "USER" WHERE email = 'muscle@hexschooltest.io');
+-- UPDATE "COACH"
+-- SET "experience_years" = 3
+-- WHERE user_id  = (SELECT ID FROM "USER" WHERE email = 'muscle@hexschooltest.io');
 
-UPDATE "COACH"
-SET "experience_years" = 5
-WHERE user_id  = (SELECT ID FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')
+-- UPDATE "COACH"
+-- SET "experience_years" = 5
+-- WHERE user_id  = (SELECT ID FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')
 
 -- 3-4 刪除：新增一個專長 空中瑜伽 至 SKILL 資料表，之後刪除此專長。
--- INSERT INTO "SKILL" (name) 
--- VALUES ('空中瑜伽');
+INSERT INTO "SKILL" (name) 
+VALUES ('空中瑜伽');
 
--- DELETE FROM "SKILL" 
--- WHERE NAME = '空中瑜伽';
+DELETE FROM "SKILL" 
+WHERE NAME = '空中瑜伽';
 
 -- --  ████████  █████   █    █   █ 
 -- --    █ █   ██    █  █     █   █ 
