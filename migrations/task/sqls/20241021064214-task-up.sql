@@ -54,42 +54,42 @@ LIMIT 3;
 --     -- 2. 名稱為`14 堂組合包方案`，價格為`2,520` 元，堂數為`14`
 --     -- 3. 名稱為 `21 堂組合包方案`，價格為`4,800` 元，堂數為`21`
 
--- INSERT INTO "CREDIT_PACKAGE" (name, credit_amount, price)
--- VALUES
--- ('7 堂組合包方案', 7, 1400),
--- ('14 堂組合包方案', 14, 2520),
--- ('21 堂組合包方案', 21, 4800);
+INSERT INTO "CREDIT_PACKAGE" (name, credit_amount, price)
+VALUES
+('7 堂組合包方案', 7, 1400),
+('14 堂組合包方案', 14, 2520),
+('21 堂組合包方案', 21, 4800);
 
 -- -- 2-2. 新增：在 `CREDIT_PURCHASE` 資料表，新增三筆資料：（請使用 name 欄位做子查詢）
 --     -- 1. `王小明` 購買 `14 堂組合包方案`
 --     -- 2. `王小明` 購買 `21 堂組合包方案`
 --     -- 3. `好野人` 購買 `14 堂組合包方案`
--- INSERT INTO "CREDIT_PURCHASE" (user_id, credit_package_id, purchased_credits, price_paid)
--- VALUES
--- (
---   (SELECT ID FROM "USER" WHERE name = '王小明'),
---   (SELECT ID FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
---   (SELECT credit_amount FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
---   (SELECT price FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案')
--- );
+INSERT INTO "CREDIT_PURCHASE" (user_id, credit_package_id, purchased_credits, price_paid)
+VALUES
+(
+  (SELECT ID FROM "USER" WHERE name = '王小明'),
+  (SELECT ID FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
+  (SELECT credit_amount FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
+  (SELECT price FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案')
+);
 
--- INSERT INTO "CREDIT_PURCHASE" (user_id, credit_package_id, purchased_credits, price_paid)
--- VALUES
--- (
---   (SELECT ID FROM "USER" WHERE name = '王小明'),
---   (SELECT ID FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案'),
---   (SELECT credit_amount FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案'),
---   (SELECT price FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案')
--- );
+INSERT INTO "CREDIT_PURCHASE" (user_id, credit_package_id, purchased_credits, price_paid)
+VALUES
+(
+  (SELECT ID FROM "USER" WHERE name = '王小明'),
+  (SELECT ID FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案'),
+  (SELECT credit_amount FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案'),
+  (SELECT price FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案')
+);
 
--- INSERT INTO "CREDIT_PURCHASE" (user_id, credit_package_id, purchased_credits, price_paid)
--- VALUES
--- (
---   (SELECT ID FROM "USER" WHERE name = '好野人'),
---   (SELECT ID FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
---   (SELECT credit_amount FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
---   (SELECT price FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案')
--- );
+INSERT INTO "CREDIT_PURCHASE" (user_id, credit_package_id, purchased_credits, price_paid)
+VALUES
+(
+  (SELECT ID FROM "USER" WHERE name = '好野人'),
+  (SELECT ID FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
+  (SELECT credit_amount FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
+  (SELECT price FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案')
+);
 
 -- -- ████████  █████   █    ████   
 -- --   █ █   ██    █  █         ██ 
@@ -173,17 +173,17 @@ LIMIT 3;
 --     -- 6. 最大授課人數`max_participants` 設定為10
 --     -- 7. 授課連結設定`meeting_url`為 https://test-meeting.test.io
 
--- INSERT INTO "COURSE" (user_id, skill_id, name, start_at, end_at, max_participants, meeting_url) 
--- VALUES
--- (
---   (SELECT ID FROM "USER" WHERE EMAIL = 'lee2000@hexschooltest.io'),
---   (SELECT ID FROM "SKILL" WHERE NAME = '重訓'),
---   '重訓基礎課',
---   '2024-11-25 14:00:00',
---   '2024-11-25 16:00:00',
---   10,
---   'https://test-meeting.test.io'
--- );
+INSERT INTO "COURSE" (user_id, skill_id, name, start_at, end_at, max_participants, meeting_url) 
+VALUES
+(
+  (SELECT ID FROM "USER" WHERE EMAIL = 'lee2000@hexschooltest.io'),
+  (SELECT ID FROM "SKILL" WHERE NAME = '重訓'),
+  '重訓基礎課',
+  '2024-11-25 14:00:00',
+  '2024-11-25 16:00:00',
+  10,
+  'https://test-meeting.test.io'
+);
 
 
 -- ████████  █████   █    █████ 
